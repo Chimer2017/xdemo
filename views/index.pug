@@ -1,5 +1,40 @@
 extends layout
+include mixins/filterOption.pug
+include mixins/filterSection.pug
+include mixins/tableRow.pug
+
 
 block content
-  h1= title
-  p Welcome to #{title}
+  #wrapper
+
+    //Banner for the app
+    #banner
+      div(class="jumbotron" id='banner')
+        div(id='banner-layer')
+          h1(class="display-4") XDemo
+          p(class="lead") Stream Your Favorite Shows Here!
+          hr(class="my-4")
+          a(class="btn btn-primary btn-lg" href="#" role="button") Search For Shows Now
+      div
+    
+    //Filter Box
+    #filter
+      //- +filterSection("Studio:", "studio")
+      //- +filterSection("Producer:", "producer")
+      //- +filterSection("Year:", "year")
+      +filterSection("Rating:", "rating",['P','PG','PG-13','R','NC-17'])
+      +filterSection("Genre:", "genre",['Rom-Com','Action','Thriller','Horror','Comedy'])
+
+
+    - var prods = [0,1,2,3,4,5]
+    #prodList
+          table
+            thead
+              th(id="title") Title
+              th(id="producer") Producer
+              th(id="genre") Genre
+              th(id="rating") Rating
+            tbody
+                - for (var i = 0; i < prodList.length; i++) {
+                    +tableRow(prodList[i]['title'],prodList[i]['producer'],prodList[i]['genre'],prodList[i]['rating'],prodList[i]['id'])
+                -  } 
