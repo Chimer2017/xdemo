@@ -28,16 +28,26 @@ function filterTable() {
   var filter = $(this).attr('name');
   if ( filter == 'display-num') {
     displayNum(value);
+    $('#label').text("Displaying: " + value);
   }
 }
 
 function displayNum(num) {
-  $.get(
+  $.ajax(
     {
       url: 'users/' + num, 
       success: function(result){
-        console.log("result");
-        $(this).text("Display: " + num);
+        var prodList = result;
+        var tableContent = '';
+        $.each(prodList,function() {
+              tableContent += '<tr>';
+              tableContent += '<td><a href="#"  class="linkresinfo" rel="' + this['id'] +'">' + this['title'] + '</a></td>';
+              tableContent += '<td>' + this['producer'] + '</td>';
+              tableContent += '<td>' + this['genre'] + '</td>';
+              tableContent += '<td>' + this['rating'] + '</td>';
+              tableContent += '<tr>';
+        });
+        $('#prodList table tbody').html(tableContent);
       }
     }
   );

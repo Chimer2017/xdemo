@@ -20,7 +20,8 @@ router.get('/:num', function(req, response, next) {
         prodList.push(el);
       });
     prodData = prodList;
-    response.render('index',{prodList:prodList});
+    response.send(prodList);
+    //response.render('index',{prodList:prodList});
   }).auth('agorovoy@rs.com','admin',true);
   
 });
