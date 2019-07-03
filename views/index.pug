@@ -2,6 +2,8 @@ extends layout
 include mixins/filterOption.pug
 include mixins/filterSection.pug
 include mixins/tableRow.pug
+include mixins/dropDown.pug
+include mixins/search.pug
 
 
 block content
@@ -14,27 +16,27 @@ block content
           h1(class="display-4") XDemo
           p(class="lead") Stream Your Favorite Shows Here!
           hr(class="my-4")
-          a(class="btn btn-primary btn-lg" href="#" role="button") Search For Shows Now
-      div
+          a(class="btn btn-primary btn-lg" href="#" role="button" id="search-btn") Search For Shows Now
     
     //Filter Box
+
     #filter
       //- +filterSection("Studio:", "studio")
       //- +filterSection("Producer:", "producer")
       //- +filterSection("Year:", "year")
+      +filterSection("Displaying: 20",'display-num',[10,20,50,100])
       +filterSection("Rating:", "rating",['P','PG','PG-13','R','NC-17'])
-      +filterSection("Genre:", "genre",['Rom-Com','Action','Thriller','Horror','Comedy'])
+      +filterSection("Genre:", "genre",['Romantic Comedy','Action','Thriller','Horror','Comedy','Drama','Sci-Fi','Music Video','Martial Arts','Animation','Fantasy'])
 
-
-    - var prods = [0,1,2,3,4,5]
     #prodList
-          table
-            thead
-              th(id="title") Title
-              th(id="producer") Producer
-              th(id="genre") Genre
-              th(id="rating") Rating
-            tbody
-                - for (var i = 0; i < prodList.length; i++) {
-                    +tableRow(prodList[i]['title'],prodList[i]['producer'],prodList[i]['genre'],prodList[i]['rating'],prodList[i]['id'])
-                -  } 
+      table
+        +search
+        thead
+          th(id="title") Title
+          th(id="producer") Producer
+          th(id="genre") Genre
+          th(id="rating") Rating
+        tbody
+          - for (var i = 0; i < prodList.length; i++) {
+              +tableRow(prodList[i]['title'],prodList[i]['producer'],prodList[i]['genre'],prodList[i]['rating'],prodList[i]['id'])
+          -  } 

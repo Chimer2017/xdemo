@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const request = require('request');
+global.prodData = [];
 
 
 
@@ -14,11 +15,16 @@ router.get('/', function(req, response, next) {
       body.Products.forEach(el => { 
         prodList.push(el);
       });
+    prodData = prodList;
     response.render('index',{prodList:prodList});
-    console.log(prodList[0].rating);
-
   }).auth('agorovoy@rs.com','admin',true);
   
+});
+
+
+
+router.get('/test',function(req,res) {
+  res.render('test');
 });
 
 module.exports = router;

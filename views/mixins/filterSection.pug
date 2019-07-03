@@ -5,8 +5,6 @@ mixin filterSection(title,rel,data)
   button(class="collapsible")= title
   div(class="content")
     table 
-      thead
-        th Test
       tbody
         each val in data
           +filterOption(rel,val)

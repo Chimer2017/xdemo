@@ -1,44 +1,9 @@
-/* body {
-  padding: 0px;
 
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+#filter {
+  width: 15%;
+  margin-top: 60px;
 
 }
-
-a {
-  color: #00B7FF;
-}
-
-#banner {
-  background-image: url(../images/banner.jpg);
-  margin: 0;
-  width: 100%;
-  height: 400px;
-}
-
-#banner-layer {
-  background-color: rgb(253, 247, 247);
-  padding: 5px;
-  margin: 12px;
-  width: 30%;
-  border-radius: 10px;
-  color: black;
-}
-
-#filter div {
-  background-color: whitesmoke;
-  border: 1px solid black;
-  padding: 20px;
-  margin: 12px;
-  width: 16%;
-  border-radius: 12px;
-}
-
-
-.filter-option {
-  margin: 0 3px;
-} */
-
 .collapsible {
   background-color: #777;
   color: white;
@@ -53,6 +18,7 @@ a {
 
 .active, .collapsible:hover {
   background-color: #555;
+
 }
 
 .collapsible:after {
@@ -74,3 +40,15 @@ a {
   transition: max-height 0.2s ease-out;
   background-color: #f1f1f1;
 }
+
+#prodList {
+  width: 70%;
+  margin: auto;
+
+  border: #777 solid 1px;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+
