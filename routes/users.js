@@ -21,7 +21,6 @@ router.get('/:num', function(req, response, next) {
       });
     prodData = prodList;
     response.send(prodList);
-    //response.render('index',{prodList:prodList});
   }).auth('agorovoy@rs.com','admin',true);
   
 });

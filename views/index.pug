@@ -21,13 +21,36 @@ block content
     //Filter Box
 
     #filter
-      //- +filterSection("Studio:", "studio")
-      //- +filterSection("Producer:", "producer")
-      //- +filterSection("Year:", "year")
       +filterSection("Displaying: 20",'display-num',[10,20,50,100])
       +filterSection("Rating:", "rating",['P','PG','PG-13','R','NC-17'])
       +filterSection("Genre:", "genre",['Romantic Comedy','Action','Thriller','Horror','Comedy','Drama','Sci-Fi','Music Video','Martial Arts','Animation','Fantasy'])
-    
+      +filterSection("Studio:", "studio",[])
+      +filterSection("Producer:", "producer",[])
+      +filterSection("Year:", "year",[])
+
+    #prodInfo
+      div(class="card" style="width: 18rem;")
+        //- img src="..." class="card-img-top" alt="..."
+        h2 Movie Information
+        div(class="card-body")
+          p
+            strong Title:
+            |  <span id='prodInfoTitle' class="card-title"></span>
+            br
+            strong Release Date:
+            |  <span id='prodInfoYear' class="card-title"></span>
+            br
+            strong Producer(s):
+            |  <span id='prodInfoProducer' class="card-text"></span>
+            br
+            strong Genre:
+            |  <span id='prodInfoGenre' class="card-text"></span>
+            br
+            strong Rating:
+            |  <span id='prodInfoRating' class="card-text"></span>
+            br
+            strong Description:
+            |  <span id='prodInfoDesc' class="card-text"></span>
     #prodList
       table
         +search
