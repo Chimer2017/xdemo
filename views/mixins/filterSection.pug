@@ -2,10 +2,10 @@ include filterOption.pug
 
 
 mixin filterSection(title,rel,data)
-  button(class="collapsible" id="label")= title
+  button(class="collapsible")= title
   div(class="content")
-    table 
-      tbody
+    table(class="filter-section" ) 
+      tbody(rel=rel)
         each val in data
           +filterOption(rel,val)
 

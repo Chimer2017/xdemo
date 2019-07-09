@@ -1,9 +1,12 @@
-extends layout
+mixin test
+    nav
+    #nav-tab.nav.nav-tabs(role='tablist')
+        a#nav-home-tab.nav-item.nav-link.active(data-toggle='tab' href='#nav-home' role='tab' aria-controls='nav-home' aria-selected='true') Home
+        a#nav-profile-tab.nav-item.nav-link(data-toggle='tab' href='#nav-profile' role='tab' aria-controls='nav-profile' aria-selected='false') Profile
+        a#nav-contact-tab.nav-item.nav-link(data-toggle='tab' href='#nav-contact' role='tab' aria-controls='nav-contact' aria-selected='false') Contact
+    #nav-tabContent.tab-content
+    #nav-home.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='nav-home-tab') ...
+    #nav-profile.tab-pane.fade(role='tabpanel' aria-labelledby='nav-profile-tab') ...
+    #nav-contact.tab-pane.fade(role='tabpanel' aria-labelledby='nav-contact-tab') ...
 
-block content
-    div(class="dropdown")
-    button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Dropdown button
-    div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
-        a(class="dropdown-item" href="#") Action
-        a(class="dropdown-item" href="#") Another
-        a(class="dropdown-item" href="#") Something
+

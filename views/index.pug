@@ -4,33 +4,19 @@ include mixins/filterSection.pug
 include mixins/tableRow.pug
 include mixins/dropDown.pug
 include mixins/search.pug
+include test.pug
+
+
 
 
 block content
-  #wrapper
 
-    //Banner for the app
-    #banner
-      div(class="jumbotron" id='banner')
-        div(id='banner-layer')
-          h1(class="display-4") XDemo
-          p(class="lead") Stream Your Favorite Shows Here!
-          hr(class="my-4")
-          a(class="btn btn-primary btn-lg" href="#" role="button" id="search-btn") Search For Shows Now
-    
-    //Filter Box
 
-    #filter
-      +filterSection("Displaying: 20",'display-num',[10,20,50,100])
-      +filterSection("Rating:", "rating",['P','PG','PG-13','R','NC-17'])
-      +filterSection("Genre:", "genre",['Romantic Comedy','Action','Thriller','Horror','Comedy','Drama','Sci-Fi','Music Video','Martial Arts','Animation','Fantasy'])
-      +filterSection("Studio:", "studio",[])
-      +filterSection("Producer:", "producer",[])
-      +filterSection("Year:", "year",[])
-
-    #prodInfo
+  #prodInfo( class="sidenav")
       div(class="card" style="width: 18rem;")
         //- img src="..." class="card-img-top" alt="..."
+        a(href="javascript:void(0)" class="closebtn" onclick="closeNav()") &times;
+        
         h2 Movie Information
         div(class="card-body")
           p
@@ -51,15 +37,56 @@ block content
             br
             strong Description:
             |  <span id='prodInfoDesc' class="card-text"></span>
-    #prodList
-      table
-        +search
-        thead
-          th(id="title") Title
-          th(id="producer") Producer
-          th(id="genre") Genre
-          th(id="rating") Rating
-        tbody
-          - for (var i = 0; i < prodList.length; i++) {
-              +tableRow(prodList[i]['title'],prodList[i]['producer'],prodList[i]['genre'],prodList[i]['rating'],prodList[i]['id'])
-          -  } 
+            div(class="col" id="stream-actions")
+              br
+              |  <span id='watchLater' class="btn btn-primary stream-actions" style="color: white;">Watch Later</span>
+              br
+              |  <span id='watchNow' class="btn btn-primary stream-actions" style="color: white;">Stream Now</span>
+
+  
+  #main
+    //Banner for the app
+    #banner
+      div(class="jumbotron" id='banner')
+        div(id='banner-layer')
+          h1(class="display-4") XDemo
+          p(class="lead") Stream Your Favorite Shows Here!
+          hr(class="my-4")
+          a(class="btn btn-primary btn-lg" href="#" role="button" id="search-btn") Search For Shows Now
+    
+    //Filter Box
+
+    #filter
+      +filterSection("Displaying: 20",'display-num',[10,20,50,100])
+      +filterSection("Rating:", "rating",['P','PG','PG-13','R','NC-17'])
+      +filterSection("Genre:", "genre",['Romantic Comedy','Action','Thriller','Horror','Comedy','Drama','Sci-Fi','Music Video','Martial Arts','Animation','Fantasy'])
+      +filterSection("Studio:", "studio",[])
+      +filterSection("Producer:", "producer",[])
+      +filterSection("Year:", "year",[])
+
+    #tables
+      button(class="tablink" onclick="openTab('prodList', this)" id="defaultOpen") All Videos
+      button(class="tablink" onclick="openTab('watchLaterTable', this)") Watch Later
+      #prodList(class='tabcontent')
+        table
+          +search
+          thead
+            th(id="title") Title
+            th(id="producer") Producer
+            th(id="genre") Genre
+            th(id="rating") Rating
+          tbody
+            - for (var i = 0; i < prodList.length; i++) {
+                +tableRow(prodList[i]['title'],prodList[i]['producer'],prodList[i]['genre'],prodList[i]['rating'],prodList[i]['id'])
+            -  } 
+      #watchLaterTable(class='tabcontent')
+        table
+          +search
+          thead
+            th(id="title") Title
+            th(id="producer") Producer
+            th(id="genre") Genre
+            th(id="rating") Rating
+          tbody
+
+    
