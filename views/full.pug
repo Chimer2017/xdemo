@@ -1,0 +1,181 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no')
+  title Dashboard - Brand
+  link(rel='stylesheet' href='assets/bootstrap/css/bootstrap.min.css')
+  link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')
+  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.1/css/all.css')
+  link(rel='stylesheet' href='assets/css/Filter.css')
+#wrapper
+  // Start: Sidebar
+  nav.navbar.navbar-dark.align-items-start.sidebar.sidebar-dark.accordion.bg-gradient-primary.p-0
+    .container-fluid.d-flex.flex-column.p-0
+      a.navbar-brand.d-flex.justify-content-center.align-items-center.sidebar-brand.m-0(href='#')
+        .sidebar-brand-icon.rotate-n-15
+          i.fas.fa-database
+        .sidebar-brand-text.mx-3
+          span MVOOVIES
+      hr.sidebar-divider.my-0
+      ul#accordionSidebar.nav.navbar-nav.text-light
+        li.nav-item(role='presentation')
+          a.nav-link.active(href='index.html')
+            i.fas.fa-filter
+            span &nbsp;Filters
+        hr.sidebar-divider
+        .sidebar-heading
+          p.mb-0
+        li.nav-item(role='presentation')
+          div
+            a.btn.btn-link.nav-link(data-toggle='collapse' aria-expanded='true' aria-controls='collapse-1' href='#collapse-1' role='button')
+              i.fab.fa-creative-commons-sampling
+              span Rating
+            #collapse-1.collapse.show
+              .bg-white.border.rounded.py-2.collapse-inner
+                a.collapse-item(href='buttons.html') G
+                a.collapse-item(href='cards.html') PG
+                a.collapse-item(href='cards.html') PG-13
+                a.collapse-item(href='cards.html') R
+                a.collapse-item(href='cards.html') NC-17
+        li.nav-item(role='presentation')
+          div
+            a.btn.btn-link.nav-link(data-toggle='collapse' aria-expanded='true' aria-controls='collapse-2' href='#collapse-2' role='button')
+              i.fas.fa-theater-masks
+              span Genre
+            #collapse-2.collapse.show
+              .bg-white.border.rounded.py-2.collapse-inner
+                a.collapse-item(href='utilities-color.html' value='Romantic Comedy') Romantic Comedy
+                a.collapse-item(href='utilities-border.html' value='Action') Action
+                a.collapse-item(href='utilities-animation.html' value='Thriller') Thriller
+                a.collapse-item(href='utilities-color.html' value='Horror') Horror
+                a.collapse-item(href='utilities-other.html' value='Comedy') Comedy
+                a.collapse-item(href='utilities-other.html' value='Drama') Drama
+                a.collapse-item(href='utilities-other.html' value='Sci-Fi') Sci-Fi
+                a.collapse-item(href='utilities-other.html' value='Music Video') Music Video
+                a.collapse-item(href='utilities-other.html' value='Martial Arts') Martial Arts
+                a.collapse-item(href='utilities-other.html' value='Animation') Animation
+                a.collapse-item(href='utilities-other.html' value='Fantasy') Fantasy
+        li.nav-item(role='presentation')
+          div
+            a.btn.btn-link.nav-link(data-toggle='collapse' aria-expanded='true' aria-controls='collapse-2' href='#collapse-2' role='button')
+              i.fas.fa-video
+              span Studio
+            #collapse-2.collapse.show
+              .bg-white.border.rounded.py-2.collapse-inner
+        li.nav-item(role='presentation')
+          div
+            a.btn.btn-link.nav-link(data-toggle='collapse' aria-expanded='true' aria-controls='collapse-2' href='#collapse-2' role='button')
+              i.fab.fa-odnoklassniki
+              span Producer
+            #collapse-2.collapse.show
+              .bg-white.border.rounded.py-2.collapse-inner
+        li.nav-item(role='presentation')
+          div
+            a.btn.btn-link.nav-link(data-toggle='collapse' aria-expanded='true' aria-controls='collapse-2' href='#collapse-2' role='button')
+              i.fas.fa-video
+              span Year
+            #collapse-2.collapse.show
+              .bg-white.border.rounded.py-2.collapse-inner
+        .sidebar-heading
+          p.mb-0
+        li.nav-item(role='presentation')
+          #collapsePages.collapse(aria-labelledby='headingTwo' data-parent='#accordionSidebar' aria-controls='collapsePages')
+            .bg-white.border.rounded.py-2.collapse-inner
+              h6.collapse-header LOGIN SCREENS:
+              a.collapse-item(href='#') Login
+              a.collapse-item(href='#') Register
+              a.collapse-item(href='#') Forgot Password
+              h6.collapse-header OTHER PAGES:
+              a.collapse-item(href='#') 404 Page
+              a.collapse-item(href='#') Blank Page
+        li.nav-item(role='presentation')
+        li.nav-item(role='presentation')
+        hr.sidebar-divider
+      .text-center.d-none.d-md-inline
+        button#sidebarToggle.btn.rounded-circle.border-0(type='button')
+  // End: Sidebar
+  #content-wrapper.d-flex.flex-column
+    #content(style='height: 600px;')
+      nav.navbar.navbar-light.navbar-expand.bg-white.shadow.mb-4.topbar.static-top
+        .container-fluid
+          button#sidebarToggleTop.btn.btn-link.d-md-none.rounded-circle.mr-3(type='button')
+            i.fas.fa-bars
+          form.form-inline.d-none.d-sm-inline-block.mr-auto.ml-md-3.my-2.my-md-0.mw-100.navbar-search
+            .input-group
+              input.bg-light.form-control.border-0.small(type='text' placeholder='Search for ...')
+              .input-group-append
+                button.btn.btn-primary.py-0(type='button')
+                  i.fas.fa-search
+      .container-fluid
+        .d-sm-flex.justify-content-between.align-items-center.mb-4
+          h3.text-dark.mb-0 What will you watch?
+        // Start: Chart
+        .row
+          .col-lg-7.col-xl-8
+            .card.shadow.mb-4
+              .card-header.d-flex.justify-content-between.align-items-center
+                h6.text-primary.font-weight-bold.m-0 All Movies
+                .dropdown.no-arrow
+                  button.btn.btn-link.btn-sm.dropdown-toggle(data-toggle='dropdown' aria-expanded='false' type='button')
+                    i.fas.fa-ellipsis-v.text-gray-400
+                  .dropdown-menu.shadow.dropdown-menu-right.animated--fade-in(role='menu')
+                    p.text-center.dropdown-header dropdown header:
+                    a.dropdown-item(role='presentation' href='#') &nbsp;Action
+                    a.dropdown-item(role='presentation' href='#') &nbsp;Another action
+                    .dropdown-divider
+                    a.dropdown-item(role='presentation' href='#') &nbsp;Something else here
+              .card-body
+                .table-responsive
+                  table.table
+                    thead
+                      tr
+                        th Title
+                        th Producer
+                        th Genre
+                        th Rating
+                    tbody
+          .col-lg-5.col-xl-4
+            .card.shadow.mb-4
+              .card-header.d-flex.justify-content-between.align-items-center
+                h6.text-primary.font-weight-bold.m-0 Movie Info
+                .dropdown.no-arrow
+                  button.btn.btn-link.btn-sm.dropdown-toggle(data-toggle='dropdown' aria-expanded='false' type='button')
+                    i.fas.fa-ellipsis-v.text-gray-400
+                  .dropdown-menu.shadow.dropdown-menu-right.animated--fade-in(role='menu')
+                    p.text-center.dropdown-header dropdown header:
+                    a.dropdown-item(role='presentation' href='#') &nbsp;Action
+                    a.dropdown-item(role='presentation' href='#') &nbsp;Another action
+                    .dropdown-divider
+                    a.dropdown-item(role='presentation' href='#') &nbsp;Something else here
+              .card-body
+                span Select A Movie to Learn More!
+                .card
+        // End: Chart
+        .row
+          .col-lg-6.mb-4
+            .card.shadow.mb-4
+              .card-header.py-3
+                h6.text-primary.font-weight-bold.m-0 Watch Later
+              .card-body
+                // Start: Card Success
+                .card.shadow.border-left-success.py-2
+                  .card-body
+                    .row.align-items-center.no-gutters
+                      .col.mr-2
+                        .text-dark.font-weight-bold.h5.mb-0
+                          span Add Movies to Watch Later!
+                // End: Card Success
+                .table-responsive
+                  table.table
+                    thead
+                      tr
+                    tbody
+            .card.shadow.mb-4
+    footer.bg-white.sticky-footer
+      .container.my-auto
+        .text-center.my-auto.copyright
+          span Copyright &copy;Rocket Software 2019
+script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js')
+script(src='assets/js/theme.js')

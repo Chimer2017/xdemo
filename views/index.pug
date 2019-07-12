@@ -4,7 +4,6 @@ include mixins/filterSection.pug
 include mixins/tableRow.pug
 include mixins/dropDown.pug
 include mixins/search.pug
-include test.pug
 
 
 
@@ -58,11 +57,11 @@ block content
 
     #filter
       +filterSection("Displaying: 20",'display-num',[10,20,50,100])
-      +filterSection("Rating:", "rating",['P','PG','PG-13','R','NC-17'])
+      +filterSection("Rating:", "rating",['G','PG','PG-13','R','Not Rated])
       +filterSection("Genre:", "genre",['Romantic Comedy','Action','Thriller','Horror','Comedy','Drama','Sci-Fi','Music Video','Martial Arts','Animation','Fantasy'])
-      +filterSection("Studio:", "studio",[])
-      +filterSection("Producer:", "producer",[])
-      +filterSection("Year:", "year",[])
+      +filterSection("Studio:", "studio",["dsds"])
+      +filterSection("Producer:", "producer",['dssd'])
+      +filterSection("Year:", "year",['dsds'])
 
     #tables
       button(class="tablink" onclick="openTab('prodList', this)" id="defaultOpen") All Videos

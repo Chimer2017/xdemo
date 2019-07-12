@@ -16,9 +16,8 @@ router.get('/', function(req, response, next) {
         prodList.push(el);
       });
     prodData = prodList;
-    response.render('index',{prodList:prodList});
+    response.render('index2',{prodList:prodList});
   }).auth('agorovoy@rs.com','admin',true);
-  
 });
 
 

@@ -2,7 +2,7 @@ include filterOption.pug
 
 
 mixin filterSection(title,rel,data)
-  button(class="collapsible")= title
+  button(class="collapsible" id=rel)= title
   div(class="content")
     table(class="filter-section" ) 
       tbody(rel=rel)
