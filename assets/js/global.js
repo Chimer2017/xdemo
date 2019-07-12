@@ -1,4 +1,3 @@
-// var coll = document.getElementsByClassName("collapsible");
 var i;
 var prodData = [];
 // var filters = $("table.filter-section tbody");
@@ -10,7 +9,7 @@ $(document).ready(function() {
     $('a.collapse-ite,.filter-option').on('click',filterTable);
     $("#searchBar").on("keyup",function(){return searchTable($(this).val().toLowerCase());});
     $('#prodList td a.link-prod-info').on("click",showProdInfo);
-//     $('#watchLater').on("click",addToWatchLater);
+    $('#watchLater').on("click",addToWatchLater);
     $('#watchNow').on('click',watchNow);
 //     $("#defaultOpen").click();
 });
@@ -41,11 +40,6 @@ function searchTable(value) {
 
 // }
 
-// function activateSearch() {
-//   var input = $('#search');
-//   //input.val("hello");
-// }
-
 function filterTable() {
   console.log("Recieved request to filter table!");
   var value = $(this).attr('value');
@@ -57,7 +51,8 @@ function filterTable() {
   } else if ( filter == 'rating') {
     value = value + "";
     rateByFilter(value);
-
+  } else if (filter == 'genre') {
+    rateByGenre(value);
   }
 }
 
@@ -78,9 +73,7 @@ function displayNum(num) {
   copyArr.splice(num);
   repopulateTable(copyArr,'all');
   $('#prodList td a.link-prod-info').on("click",showProdInfo);
-
-
-}
+};
 
 function rateByFilter(value) {
   var searchStr = value.replace(/-/g,'');
@@ -106,6 +99,21 @@ function rateByFilter(value) {
 
 }
 
+function rateByGenre(value) {
+    var searchStr = value + "";
+    var tds = $("#prodList tr td.genre");
+    $.each(tds,function() {
+        var genre = $(this).text();
+        console.log(genre+ "   :   " + searchStr);
+        if (genre === searchStr) {
+        $(this).parent().show();
+        } else {
+        $(this).parent().hide();
+        }
+
+    });
+    $('span.filter-header.genre').text("Genre: " + value);
+};
 
 function dataPosMap(prodID) {
   var pos = prodData.map(function(prod) {
@@ -120,6 +128,12 @@ function showProdInfo(e) {
   var prodID = $(this).attr('rel');
   var pos = dataPosMap(prodID);
 
+  if (!checkButtonDisabled(prodID)) {
+      $('#watchLater').removeClass('disabled');
+  } else {
+    $('#watchLater').addClass('disabled');
+  }
+
   $('#prodInfoTitle').text(prodData[pos]['title']);
   $('#prodInfoYear').text(prodData[pos]['theaterdate']);
   $('#prodInfoProducer').text(prodData[pos]['producer']);
@@ -129,36 +143,32 @@ function showProdInfo(e) {
   $('.stream-actions').attr('rel',prodData[pos]['id'])
 }
 
-// function addToWatchLater(e) {
-//   e.preventDefault();
-//   var prodID = $(this).attr('rel');
-//   var pos = dataPosMap(prodID);
-//   watchLater.push(prodData[pos]);
-// }
+function checkButtonDisabled(prodID) {
+    for (var i = 0; i < watchLater.length;i++)
+    {
+        if (watchLater[i]['id'] == prodID) {
+            console.log("gedmdke");
+            return true;
+        }
+    }
+    return false;
+
+
+
+}
+
+function addToWatchLater(e) {
+  e.preventDefault();
+  var prodID = $('span.stream-actions').attr('rel');
+  var pos = dataPosMap(prodID);
+  watchLater.push(prodData[pos]);
+  $(this).addClass('disabled');
+  repopulateTable(watchLater,'later');
+}
 
 function watchNow() {
   alert("watching now");
 }
-
-// function openTab(tableName, elmnt) {
-//   var i, tabcontent, tablinks;
-//   tabcontent = document.getElementsByClassName("tabcontent");
-//   for (i = 0; i < tabcontent.length; i++) {
-//     tabcontent[i].style.display = "none";
-//   }
-
-//   tablinks = document.getElementsByClassName("tablink");
-//   for (i = 0; i < tablinks.length; i++) {
-//     tablinks[i].style.backgroundColor = "";
-//   }
-
-//   document.getElementById(tableName).style.display = "block";
-//   if (tableName == "watchLaterTable") {
-//     repopulateTable(watchLater);
-//   }
-
-//   elmnt.style.backgroundColor = "powderblue";
-// }
 
 function repopulateTable(arr,table_type) {
   var tableContent = '';
@@ -175,9 +185,11 @@ function repopulateTable(arr,table_type) {
   if (table_type == "all") {
       tableQuery = '#prodList tbody';
   } else {
-      tableQuery = '#watchLaterTable table tbody';
+      $('#watchLaterList thead tr').html('<th>Title</th><th>Producer</th><th>Genre</th><th>Rating</th>');
+      tableQuery = '#watchLaterList tbody';
   }
   $(tableQuery).html(tableContent);
 
 
 };
+
