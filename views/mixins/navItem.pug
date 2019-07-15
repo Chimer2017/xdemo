@@ -5,7 +5,7 @@ mixin navItem(title,rel,data)
             div
                 a.btn.btn-link.nav-link(data-toggle='collapse' aria-expanded='true' aria-controls=rel href='#' + rel role='button')
                     i.fab.fa-creative-commons-sampling
-                    span(class="filter-header " + rel )= title
+                    span(class="filter-header " + rel value='null' name=title)= title
                 div.collapse.show(id=rel)
                     .bg-white.border.rounded.py-2.collapse-inner
                         each val in data
