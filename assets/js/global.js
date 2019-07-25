@@ -2,10 +2,16 @@ var i;
 var prodData = [];
 // var filters = $("table.filter-section tbody");
 var watchLater = [];
+var studios = [];
+var years = [];
+var producers = [];
+var disStudios, disYears,disProducers;
 
-getProdMapData();
+
+
 
 $(document).ready(function() {
+    getProdMapData();
     $('a.collapse-ite,.filter-option').on('click',filterTable);
     $("#searchBar").on("keyup",function(){return searchTable($(this).val().toLowerCase());});
     $('#prodList td a.link-prod-info').on("click",showProdInfo);
@@ -79,16 +85,18 @@ function filterTable() {
 }
 
 function getProdMapData() {
-  $.ajax(
-    {
-      url: 'users/100', 
-      success: function(result){
-        var prodList = result;
-        prodData = prodList;
-      }
-    }
-  );
-}
+  console.log("Getting data");
+  $.getJSON('/users/100',function(data) {
+    $.each(data, function(index,el){
+      studios.push(el['studio']);
+      producers.push(el['producer']);
+      years.push(el['theaterdate']);
+
+    })
+    fillFilters();
+});
+  console.log("Got that data");
+};
 
 function displayNum(num) {
   var arr = [];
@@ -242,6 +250,40 @@ function repopulateTable(arr,table_type) {
   }
   $(tableQuery).html(tableContent);
   $('#prodList td a.link-prod-info').on("click",showProdInfo);
+
+
+}
+
+function fillFilters() {
+  disStudios = [...new Set(studios)];
+  var temp = [];
+  // console.log(producers);
+  producers.forEach(function(el) {
+    el.forEach(function(e) {
+      temp.push(e);
+    });
+  });
+  disProducers = [...new Set(temp)];
+  temp = [];
+  years.forEach(function(el){
+    var val = parseInt(el.substring(el.length-4,el.length),10);
+    temp.push(val);
+  });
+  disYears = [...new Set(temp)];
+  disYears.sort();
+  disYears = disYears.slice(0,disYears.length-1);
+  fillFiltersHelper(disStudios,'studio');
+  fillFiltersHelper(disProducers,'producer');
+  fillFiltersHelper(disYears,'theaterdate');
+}
+
+function fillFiltersHelper(array,rel) {
+  var filterContent = '';
+  for(var i = 0; i < array.length; i++)
+  {
+    filterContent += '<a href="#" class="collapse-item filter-option" rel="' + rel + '" val="' + array[i].toString() +'">' + array[i].toString() + '</a>' ;
+  }
+  $('#'+rel+' div.bg-white.border.rounded.py-2.collapse-inner').html(filterContent);
 
 
 }
