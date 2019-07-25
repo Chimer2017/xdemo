@@ -20,27 +20,10 @@ function searchTable(value) {
   });
 }
 
-// function populateFilters() {
-//   //for item in data
-//   $.each(filters,function(){
-//     var filterType = $(this).attr('rel');
-//     var filterDict = {};
-//     // console.log(filterType);
-//     // console.log(prodData[i]);
-//     for (var i = 0; i < prodData.length;i++)
-//     {
-//       // console.log(prodData[i]['title']);
-//     }
-//   });
-//     // check if in object
-//       //if yes, then next item
-//       //else add item to filter table
-
-
-
-// }
-
 function filterTable() {
+
+
+
   console.log("Recieved request to filter table!");
   var filters = $("span.filter-header");
   filters.splice(0,1);
@@ -48,6 +31,14 @@ function filterTable() {
   var value;
   var triggerValue = $(this).attr('value');
   var triggerFilter = $(this).attr('rel');
+
+  if ( triggerFilter == 'display-num') {
+    console.log(triggerValue);
+    displayNum(triggerValue);
+    $('span.filter-header.display-num').text("Displaying: " + triggerValue);
+    return;
+  }
+
   $.each(filters,function(){
     console.log($(this).attr('name')+ ":"+$(this).attr('value'));
     var filter = $(this).attr('name');
@@ -61,13 +52,23 @@ function filterTable() {
         value = value.replace(/-/g,'');
         if (value =="Not Rated") value = "NR";
         var temp = filter + ' = "' + value + '"';
-        qryStr += temp;
+        qryStr = temp;
+        $('span.filter-header.rating').text("Rating: " + triggerValue);
 
       }
 
-      if 
+      if (filter == 'genre') {
+        if (value == 'null') value = triggerValue;
+        var temp = filter + ' = "' + value + '"';
+        qryStr = temp;
+        $('span.filter-header.genre').text("Genre: " + triggerValue);
+
+      }
+
+     
 
     }
+    $('#prodList td a.link-prod-info').on("click",showProdInfo);
     
   });
   
@@ -75,17 +76,6 @@ function filterTable() {
   $.getJSON('/users/filter/' + qryStr,function(data){
     repopulateTable(data,'all');
   });
-
-
-  // if ( filter == 'display-num') {
-  //   displayNum(value);
-  //   $('span.filter-header.display-num').text("Displaying: " + value);
-  // } else if ( filter == 'rating') {
-  //   value = value + "";
-  //   rateByFilter(value);
-  // } else if (filter == 'genre') {
-  //   rateByGenre(value);
-  // }
 }
 
 function getProdMapData() {
@@ -101,9 +91,11 @@ function getProdMapData() {
 }
 
 function displayNum(num) {
-  var copyArr = prodData.slice(0);
-  copyArr.splice(num);
-  repopulateTable(copyArr,'all');
+  var arr = [];
+  $.getJSON('/users/' + num, function(data) {
+    console.log(data);
+    repopulateTable(data,'all');
+  });
   $('#prodList td a.link-prod-info').on("click",showProdInfo);
 };
 
@@ -174,8 +166,9 @@ function dataPosMap(prodID) {
 // }
 
 function showProdInfo(e) {
-    var prodData;
+    console.log("Link clicked");
     e.preventDefault();
+    $('#prodInfo').removeClass('hidden');
     var prodID = $(this).attr('rel');
     $.getJSON('/users/prodID/' + prodID,function(data) {
         $('#prodInfoTitle').text(data['title']);
@@ -248,7 +241,8 @@ function repopulateTable(arr,table_type) {
       tableQuery = '#watchLaterList tbody';
   }
   $(tableQuery).html(tableContent);
+  $('#prodList td a.link-prod-info').on("click",showProdInfo);
 
 
-};
+}
 

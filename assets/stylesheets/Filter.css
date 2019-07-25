@@ -30,3 +30,12 @@
 .stream-actions {
   margin: 5px;
 }
+
+#watch-later {
+  margin-left: 0px;
+}
+
+.hidden {
+  display: none;
+  
+}

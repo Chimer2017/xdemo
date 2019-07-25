@@ -98,12 +98,12 @@ head
                         - for (var i = 0; i < prodList.length; i++) {
                             +tableRow(prodList[i]['title'],prodList[i]['producer'],prodList[i]['genre'],prodList[i]['rating'],prodList[i]['id'])
                         -  } 
-          .col-lg-5.col-xl-4
+          .col-lg-5.col-xl-4(id='movie-info')
             .card.shadow.mb-4
               .card-header.d-flex.justify-content-between.align-items-center
                 h6.text-primary.font-weight-bold.m-0 Movie Info
                 .dropdown.no-arrow
-              .card-body(id='prodInfo')
+              .card-body(id='prodInfo' class='hidden')
                 span Select A Movie to Learn More!
                     hr
                     h2 Movie Information
@@ -131,29 +131,47 @@ head
                             |  <span id='watchLater' class="btn btn-primary stream-actions" style="color: white;">Watch Later</span>
                             br
                             |  <span id='watchNow' class="btn btn-primary stream-actions" style="color: white;">Stream Now</span>
-
+            div(id='watch-later')
+              .card.shadow.mb-4
+                .card-header.py-3
+                  h6.text-primary.font-weight-bold.m-0 Watch Later
+                .card-body
+                  // Start: Card Success
+                  .card.shadow.border-left-success.py-2
+                    .card-body
+                      .row.align-items-center.no-gutters
+                        .col.mr-2
+                          .text-dark.font-weight-bold.h5.mb-0
+                            span Add Movies to Watch Later!
+                  // End: Card Success
+                  .table-responsive
+                    table.table(id='watchLaterList')
+                      thead
+                        tr
+                      tbody
+              //- .card.shadow.mb-4
                             
-        // End: Chart
-        .row
-          .col-lg-6.mb-4
-            .card.shadow.mb-4
-              .card-header.py-3
-                h6.text-primary.font-weight-bold.m-0 Watch Later
-              .card-body
-                // Start: Card Success
-                .card.shadow.border-left-success.py-2
-                  .card-body
-                    .row.align-items-center.no-gutters
-                      .col.mr-2
-                        .text-dark.font-weight-bold.h5.mb-0
-                          span Add Movies to Watch Later!
-                // End: Card Success
-                .table-responsive
-                  table.table(id='watchLaterList')
-                    thead
-                      tr
-                    tbody
-            .card.shadow.mb-4
+        //- // End: Chart
+        //- .row
+        //-   .col-lg-6.mb-4
+        //-     .card.shadow.mb-4
+        //-       .card-header.py-3
+        //-         h6.text-primary.font-weight-bold.m-0 Watch Later
+        //-       .card-body
+        //-         // Start: Card Success
+        //-         .card.shadow.border-left-success.py-2
+        //-           .card-body
+        //-             .row.align-items-center.no-gutters
+        //-               .col.mr-2
+        //-                 .text-dark.font-weight-bold.h5.mb-0
+        //-                   span Add Movies to Watch Later!
+        //-         // End: Card Success
+        //-         .table-responsive
+        //-           table.table(id='watchLaterList')
+        //-             thead
+        //-               tr
+        //-             tbody
+        //-     .card.shadow.mb-4
     //- footer.bg-white
     //-   .container.my-auto
     //-     .text-center.my-auto.copyright

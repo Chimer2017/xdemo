@@ -53,9 +53,6 @@ router.get('/filter/:query',function(req,response){
   
     //response.send(body);
   }).auth('agorovoy@rs.com','admin',true);
-
-
-
 });
 
 
