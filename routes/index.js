@@ -4,11 +4,14 @@ const request = require('request');
 global.prodData = [];
 
 
+router.get('/',function(req,res) {
+  res.render('port');
+});
 
 
 
-/* GET home page. */
-router.get('/', function(req, response, next) {  
+
+router.get('/main', function(req, response, next) {  
   var prodList = [];
   request('http://den-vm-eng142.rocketsoftware.com:7171/Xdemo/Products?max=20', { json: true }, (err, res, body) => {
     if (err) { return console.log(err); }

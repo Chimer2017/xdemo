@@ -8,10 +8,10 @@ var producers = [];
 var disStudios, disYears,disProducers;
 
 
-
+getProdMapData();
 
 $(document).ready(function() {
-    getProdMapData();
+   
     $('a.collapse-ite,.filter-option').on('click',filterTable);
     $("#searchBar").on("keyup",function(){return searchTable($(this).val().toLowerCase());});
     $('#prodList td a.link-prod-info').on("click",showProdInfo);
@@ -94,6 +94,7 @@ function getProdMapData() {
 
     })
     fillFilters();
+    prodData = data;
 });
   console.log("Got that data");
 };
@@ -212,14 +213,15 @@ function checkButtonDisabled(prodID) {
 function addToWatchLater(e) {
   e.preventDefault();
   var prodID = $('span.stream-actions').attr('rel');
-  // if (!checkButtonDisabled(prodID)) {
-  //   $('#watchLater').removeClass('disabled');
-  // } else {
-  //   $('#watchLater').addClass('disabled');
-  // }
+  if (!checkButtonDisabled(prodID)) {
+    $('#watchLater').removeClass('disabled');
+  } else {
+    $('#watchLater').addClass('disabled');
+  }
   if (!checkButtonDisabled(prodID)) {
     var pos = dataPosMap(prodID);
     watchLater.push(prodData[pos]);
+    console.log(watchLater);
     $(this).addClass('disabled');
     repopulateTable(watchLater,'later');
   }
@@ -232,6 +234,7 @@ function watchNow() {
 
 function repopulateTable(arr,table_type) {
   var tableContent = '';
+  console.log("len: " + arr.length);
   for (var i = 0; i < arr.length;i++)
   {
     tableContent += '<tr>';

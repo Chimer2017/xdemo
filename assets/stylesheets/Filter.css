@@ -37,5 +37,13 @@
 
 .hidden {
   display: none;
-  
+}
+
+div.bg-white.border.rounded.py-2.collapse-inner {
+  width: 192px;
+}
+
+a .collapse-item {
+  width: 100%;
+  height: auto;
 }
