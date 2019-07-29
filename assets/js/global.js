@@ -1,6 +1,5 @@
 var i;
 var prodData = [];
-// var filters = $("table.filter-section tbody");
 var watchLater = [];
 var studios = [];
 var years = [];
@@ -11,13 +10,11 @@ var disStudios, disYears,disProducers;
 getProdMapData();
 
 $(document).ready(function() {
-   
-    $('a.collapse-ite,.filter-option').on('click',filterTable);
     $("#searchBar").on("keyup",function(){return searchTable($(this).val().toLowerCase());});
     $('#prodList td a.link-prod-info').on("click",showProdInfo);
     $('#watchLater').on("click",addToWatchLater);
     $('#watchNow').on('click',watchNow);
-//     $("#defaultOpen").click();
+    
 });
 
 function searchTable(value) {
@@ -27,16 +24,15 @@ function searchTable(value) {
 }
 
 function filterTable() {
-
-
-
   console.log("Recieved request to filter table!");
   var filters = $("span.filter-header");
   filters.splice(0,1);
   var qryStr = "";
+  var and = ' AND ';
   var value;
   var triggerValue = $(this).attr('value');
   var triggerFilter = $(this).attr('rel');
+  console.log(triggerValue);
 
   if ( triggerFilter == 'display-num') {
     console.log(triggerValue);
@@ -46,40 +42,55 @@ function filterTable() {
   }
 
   $.each(filters,function(){
-    console.log($(this).attr('name')+ ":"+$(this).attr('value'));
+    
     var filter = $(this).attr('name');
+    // console.log("Filter: " + filter);
+    // console.log($(this).attr('name')+ ":"+$(this).attr('value'));
     filter = filter.toLowerCase();
     filter = filter.replace(/:/g,'');
     value = $(this).attr('value');
+    console.log("Filter: " + filter);
+    console.log($(this).attr('name')+ ":"+$(this).attr('value'));
     if((value != "null") || (filter == triggerFilter)) {
+      
       
       if (filter == 'rating') {
         if ( value == 'null') value = triggerValue;
+        console.log("In Rating -->");
         value = value.replace(/-/g,'');
         if (value =="Not Rated") value = "NR";
         var temp = filter + ' = "' + value + '"';
-        qryStr = temp;
-        $('span.filter-header.rating').text("Rating: " + triggerValue);
+        qryStr += temp + and;
+        $('span.filter-header.rating').text("Rating: " + value);
 
       }
 
       if (filter == 'genre') {
+        console.log("In Genre -->");
         if (value == 'null') value = triggerValue;
         var temp = filter + ' = "' + value + '"';
-        qryStr = temp;
-        $('span.filter-header.genre').text("Genre: " + triggerValue);
+        qryStr += temp + and;
+        $('span.filter-header.genre').text("Genre: " + value);
 
       }
 
-     
+      if (filter == 'studio') {
+        console.log("In Studio -->");
+        if (value == 'null') value = triggerValue;
+        var temp = filter + ' = "' + value + '"';
+        qryStr += temp + and;
+        $('span.filter-header.studio').text("Studio: " + value);
+
+      }
 
     }
     $('#prodList td a.link-prod-info').on("click",showProdInfo);
+    $('span.filter-header.' + triggerFilter).attr('value',triggerValue);
     
   });
   
   console.log(qryStr);
-  $.getJSON('/users/filter/' + qryStr,function(data){
+  $.getJSON('/users/filter/' + 'rating = "R"',function(data){
     repopulateTable(data,'all');
   });
 }
@@ -95,9 +106,15 @@ function getProdMapData() {
     })
     fillFilters();
     prodData = data;
-});
+    $('a.collapse-item.filter-option').on('click',filterTable);
+  });
   console.log("Got that data");
+  
 };
+
+function valTest() {
+  console.log($(this).attr('val'));
+}
 
 function displayNum(num) {
   var arr = [];
@@ -278,16 +295,19 @@ function fillFilters() {
   fillFiltersHelper(disStudios,'studio');
   fillFiltersHelper(disProducers,'producer');
   fillFiltersHelper(disYears,'theaterdate');
-}
+
+};
 
 function fillFiltersHelper(array,rel) {
   var filterContent = '';
   for(var i = 0; i < array.length; i++)
   {
-    filterContent += '<a href="#" class="collapse-item filter-option" rel="' + rel + '" val="' + array[i].toString() +'">' + array[i].toString() + '</a>' ;
+    filterContent += '<a href="#" class="collapse-item filter-option" rel="' + rel + '" value="' + array[i].toString() +'">' + array[i].toString() + '</a>' ;
   }
   $('#'+rel+' div.bg-white.border.rounded.py-2.collapse-inner').html(filterContent);
+ 
+  
 
 
-}
+};
 

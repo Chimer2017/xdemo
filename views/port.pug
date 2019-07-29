@@ -11,9 +11,9 @@ head
 body
     #wrapper
         #form
-            p In order to run the demo locally, please input the port number where MVIS is running. The app will handles everything else from there.
+            p In order to run the demo locally, please input the port number where MVIS is running. The app will handle everything else from there.
             #form-div
-                form(action="/main", method="GET")
+                form(action="/main", method="POST")
                     label(for="port") Please Input Your Port Number : 
                         input#port(type="text", name="port" placeholder='Port Number' required) 
                     input(type="submit")

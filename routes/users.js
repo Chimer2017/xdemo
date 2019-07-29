@@ -3,7 +3,7 @@ var router = express.Router();
 const request = require('request');
 
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.send('Port:' + port);
 });
 
 router.get('/:num', function(req, response, next) {  
@@ -12,7 +12,7 @@ router.get('/:num', function(req, response, next) {
   if (num > 100) {
     num = 100;
   }
-  var URL = 'http://den-vm-eng142.rocketsoftware.com:7171/Xdemo/Products?max=' + num;
+  var URL = 'http://den-vm-eng142.rocketsoftware.com:' + port + '/Xdemo/Products?max=' + num;
   console.log(URL);
   request(URL, { json: true }, (err, res, body) => {
     if (err) { return console.log(err); }
@@ -29,7 +29,7 @@ router.get('/prodID/:prodID',function(req,response){
   var prodList = [];
   var id = req.params.prodID;
   console.log(id);
-  var URL = 'http://den-vm-eng142.rocketsoftware.com:7171/Xdemo/Products/' + id ;
+  var URL = 'http://den-vm-eng142.rocketsoftware.com:' + port + '/Xdemo/Products/' + id ;
   request(URL, { json: true }, (err, res, body) => {
     if (err) { return console.log(err); }
     response.send(body);
@@ -40,7 +40,7 @@ router.get('/prodID/:prodID',function(req,response){
 router.get('/filter/:query',function(req,response){
   var searchQuery = req.params.query;
   var prodList = [];
-  var URL = 'http://den-vm-eng142.rocketsoftware.com:7171/Xdemo/Products?select=' + searchQuery;
+  var URL = 'http://den-vm-eng142.rocketsoftware.com:' + port + '/Xdemo/Products?select=' + searchQuery;
   console.log(URL);
   request(URL, { json: true }, (err, res, body) => {
     if (err) { return console.log(err); }
