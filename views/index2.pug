@@ -13,6 +13,7 @@ head
   link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')
   link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.1/css/all.css')
   link(rel='stylesheet' href='/stylesheets/Filter.css')
+
 #wrapper
   // Start: Sidebar   This is the side bar and filter section
   nav.navbar.navbar-dark.align-items-start.sidebar.sidebar-dark.accordion.bg-gradient-primary.p-0
@@ -102,6 +103,7 @@ head
             .card.shadow.mb-4
               .card-header.d-flex.justify-content-between.align-items-center
                 h6.text-primary.font-weight-bold.m-0 Movie Info
+                i(class="far fa-plus-square" id='switch')
                 .dropdown.no-arrow
               .card-body(id='prodInfo' class='hidden')
                 span Select A Movie to Learn More!

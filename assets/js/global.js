@@ -5,6 +5,8 @@ var studios = [];
 var years = [];
 var producers = [];
 var disStudios, disYears,disProducers;
+var initInfo = true;
+var expanded = false;
 
 
 getProdMapData();
@@ -14,8 +16,28 @@ $(document).ready(function() {
     $('#prodList td a.link-prod-info').on("click",showProdInfo);
     $('#watchLater').on("click",addToWatchLater);
     $('#watchNow').on('click',watchNow);
+    $('#switch').on('click',switchInfo);
     
 });
+
+function switchInfo() {
+  if (initInfo) {
+    alert("Select a Movie to Learn More!");
+    return;
+  }
+  if (expanded) {
+    $('#prodInfo').addClass('hidden');
+    expanded = false;
+    $('#switch').addClass('fa-plus-square');
+    $('#switch').removeClass('fa-minus-square');
+  } else {
+    $('#prodInfo').removeClass('hidden');
+    expanded = true;
+    $('#switch').removeClass('fa-plus-square');
+    $('#switch').addClass('fa-minus-square');
+
+  }
+}
 
 function searchTable(value) {
   $("#prodList tbody tr").filter(function() {
@@ -80,8 +102,30 @@ function filterTable() {
         var temp = filter + ' = "' + value + '"';
         qryStr += temp + and;
         $('span.filter-header.studio').text("Studio: " + value);
-
       }
+
+      if (filter == 'producer') {
+        console.log("In Producer -->");
+        if (value == 'null') value = triggerValue;
+        var temp = filter + ' = "' + value + '"';
+        qryStr += temp + and;
+        $('span.filter-header.producer').text("Producer: " + value);
+      }
+
+      if (filter == 'year') {
+        console.log("In Year -->");
+        if (value == 'null') value = triggerValue;
+        var temp;
+        years.forEach(function(el) {
+          if (el.substring(el.length-4,el.length) == value) {
+            temp = filter + ' = "' + el + '"';
+          }
+        });
+        
+        qryStr += temp + and;
+        $('span.filter-header.theaterdate').text("Year: " + value);
+      }
+     
 
     }
     $('#prodList td a.link-prod-info').on("click",showProdInfo);
@@ -89,6 +133,8 @@ function filterTable() {
     
   });
   
+  
+  qryStr = qryStr.substring(0,qryStr.length-5);
   console.log(qryStr);
   $.getJSON('/users/filter/' + 'rating = "R"',function(data){
     repopulateTable(data,'all');
@@ -111,10 +157,6 @@ function getProdMapData() {
   console.log("Got that data");
   
 };
-
-function valTest() {
-  console.log($(this).attr('val'));
-}
 
 function displayNum(num) {
   var arr = [];
@@ -193,6 +235,8 @@ function dataPosMap(prodID) {
 
 function showProdInfo(e) {
     console.log("Link clicked");
+    initInfo = false;
+    expanded = true;
     e.preventDefault();
     $('#prodInfo').removeClass('hidden');
     var prodID = $(this).attr('rel');
@@ -305,8 +349,6 @@ function fillFiltersHelper(array,rel) {
     filterContent += '<a href="#" class="collapse-item filter-option" rel="' + rel + '" value="' + array[i].toString() +'">' + array[i].toString() + '</a>' ;
   }
   $('#'+rel+' div.bg-white.border.rounded.py-2.collapse-inner').html(filterContent);
- 
-  
 
 
 };

@@ -5,6 +5,7 @@ body {
 #wrapper {
     margin: auto;
     width: 760px;
+    padding-top: 200px;
 
 }
 #form {
@@ -14,15 +15,16 @@ body {
     display: block;
     text-align: center;
     color: white;
-    /* position: fixed;
-    top: 200px; */
+    border: white solid 2px;
+    border-radius: 15px;
+
 
 }
 p {
 
     width: 350px;
     margin: auto  ;
-    margin-top: 200px;
+    margin-top: 150px;
     margin-bottom: 50px;
 }
 
@@ -45,12 +47,11 @@ label {
 
 input {
     margin: auto;
-
     display: block;
     border: none;
     width: 200px;
     height: 40px;
     border-radius: 15px;
     text-align: center;
-
+    margin-bottom: 30px;
 }
