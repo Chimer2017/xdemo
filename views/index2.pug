@@ -32,29 +32,21 @@ head
         hr.sidebar-divider
         .sidebar-heading
           p.mb-0
-        //- Need to create mixin for list item
         +navItem("Display:", "display-num",[10,20,50,100])
         +navItem("Rating:", "rating",['G','PG','PG-13','R','Not Rated'])
         +navItem("Genre:", "genre",['Romantic Comedy','Action','Thriller','Horror','Comedy','Drama','Sci-Fi','Music Video','Martial Arts','Animation','Fantasy'])
         +navItem("Studio:", "studio",[])
         +navItem("Producer:", "producer",[])
         +navItem("Year:", "theaterdate",[])
-        
-        //- li.nav-item(role='presentation')
-        //-   #collapsePages.collapse(aria-labelledby='headingTwo' data-parent='#accordionSidebar' aria-controls='collapsePages')
-        //-     .bg-white.border.rounded.py-2.collapse-inner
-        //-       h6.collapse-header LOGIN SCREENS:
-        //-       a.collapse-item(href='#') Login
-        //-       a.collapse-item(href='#') Register
-        //-       a.collapse-item(href='#') Forgot Password
-        //-       h6.collapse-header OTHER PAGES:
-        //-       a.collapse-item(href='#') 404 Page
-        //-       a.collapse-item(href='#') Blank Page
-        //- li.nav-item(role='presentation')
-        //- li.nav-item(role='presentation')
+        .text-center.d-none.d-md-inline
+          i#eraser(class="fas fa-eraser hidden")
+          input#filterReset.btn.btn-primary(type="reset" value="Reset Filters")
+            
         hr.sidebar-divider
+     
       .text-center.d-none.d-md-inline
         button#sidebarToggle.btn.rounded-circle.border-0(type='button')
+      
   // End: Sidebar
   #content-wrapper.d-flex.flex-column
     #content(style='height: 600px;')

@@ -59,3 +59,12 @@ a .collapse-item {
 h6.text-primary.font-weight-bold.m-0 {
   padding-right: 11em;
 }
+
+
+#filterReset {
+  width: 3 rem;
+  height: 1.5 rem;
+  margin-bottom: 5px;
+
+
+}

@@ -17,8 +17,25 @@ $(document).ready(function() {
     $('#watchLater').on("click",addToWatchLater);
     $('#watchNow').on('click',watchNow);
     $('#switch').on('click',switchInfo);
-    
+    $('#filterReset,#eraser').on('click',clearFilters);
+    $('#sidebarToggle').on('click',toggleFilterReset);
 });
+
+function toggleFilterReset() {
+  $('#eraser').toggle('hidden');
+  $('#filterReset').toggle("hidden");
+}
+function clearFilters() {
+  $('span.filter-header.display-num').text("Displaying: ");
+  $('span.filter-header.rating').text("Rating: ");
+  $('span.filter-header.genre').text("Genre: ");
+  $('span.filter-header.studio').text("Studio: ");
+  $('span.filter-header.theaterdate').text("Year: ");
+  $.getJSON('/users/100',function(data){
+    repopulateTable(data,'all');
+  });
+
+}
 
 function switchInfo() {
   if (initInfo) {
@@ -136,6 +153,7 @@ function filterTable() {
   
   qryStr = qryStr.substring(0,qryStr.length-5);
   console.log(qryStr);
+  //rating = "R"
   $.getJSON('/users/filter/' + 'rating = "R"',function(data){
     repopulateTable(data,'all');
   });
