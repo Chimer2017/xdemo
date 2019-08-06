@@ -1,9 +1,17 @@
+/*
+This router handles all requests originating from the browser. 
+*/
+
 var express = require('express');
 var router = express.Router();
 const request = require('request');
 const config = require('../config');
 
 global.prodData = [];
+
+/*
+This route renders the landing page. Sends request to MVIS to get data and then sends it to the front end to get displayed.
+*/
 
 router.get('/', function(req, response, next) {
   console.log("hello");
@@ -17,14 +25,9 @@ router.get('/', function(req, response, next) {
         prodList.push(el);
       });
     prodData = prodList;
-    response.render('index2',{prodList:prodList});
+    response.render('index',{prodList:prodList});
   }).auth('agorovoy@rs.com','admin',true);
 });
 
-
-
-router.get('/test',function(req,res) {
-  res.render('test');
-});
 
 module.exports = router;

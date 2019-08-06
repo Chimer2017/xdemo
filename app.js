@@ -1,3 +1,7 @@
+/*
+This file defines all modules necessary for the application and creates respective route models.
+*/
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
