@@ -19,7 +19,7 @@ This will serve as a guide to installing and running the MVoovies application. Y
 * UniVerse - If UniVerse is not installed on your machine, please follow the installation guide found [here](#)
 
 ### Running the Demo Locally
-1. Clone [this](https://github.com/Chimer2017/xdemo) or run `git clone https://github.com/Chimer2017/xdemo.git'
+1. Clone [this](https://github.com/Chimer2017/xdemo) or run `git clone https://github.com/Chimer2017/xdemo.git`
 2. `npm install` to install all required packages and modules for the application
 3. `npm start` to the local server
 4. Navigate to [localhost:5555](http://localhost:5555/)
