@@ -255,6 +255,8 @@ function showProdInfo(e) {
     console.log("Link clicked");
     initInfo = false;
     expanded = true;
+    $('#switch').removeClass('fa-plus-square');
+    $('#switch').addClass('fa-minus-square');
     e.preventDefault();
     $('#prodInfo').removeClass('hidden');
     var prodID = $(this).attr('rel');
