@@ -1,5 +1,7 @@
 /*
 This router handles all requests originating from the browser. 
+© 2019 Rocket Software, Inc. or its affiliates. All Rights Reserved
+Written by Andrew Gorovoy
 */
 
 var express = require('express');

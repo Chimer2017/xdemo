@@ -1,5 +1,7 @@
 /*
 This file defines all modules necessary for the application and creates respective route models.
+//- © 2019 Rocket Software, Inc. or its affiliates. All Rights Reserved
+//- Written by Andrew Gorovoy 
 */
 
 var createError = require('http-errors');

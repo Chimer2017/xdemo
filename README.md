@@ -9,6 +9,8 @@ Welcome to the MVoovies XDemo wiki!
 
 This will serve as a guide to installing and running the MVoovies application. You should be up and running in no time.
 
+In addition, a blog post and video explanation about the application can be found [here](#).
+
 # Installation
 
 ## Getting Started

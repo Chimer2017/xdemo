@@ -1,6 +1,8 @@
 /*
 This router handles all internal requests and responses. Used for updating the front end with new data without reloading the entire page.
-This type of internal router is required to adhere to CORS Policy
+This type of internal router is required to adhere to CORS Policy.
+© 2019 Rocket Software, Inc. or its affiliates. All Rights Reserved
+Written by Andrew Gorovoy
 */
 var express = require('express');
 var router = express.Router();
@@ -19,7 +21,7 @@ router.get('/:num', function(req, response, next) {
   var URL = config.mvis.baseEndPointURL + config.mvis.port + '/Xdemo/Products?max=' + num;
   console.log(URL);
   request(URL, { json: true }, (err, res, body) => {
-    if (err) { return console.log(err); }
+    if (err) { console.log(err); return null; }
       body.Products.forEach(el => { 
         prodList.push(el);
       });
@@ -38,7 +40,7 @@ router.get('/prodID/:prodID',function(req,response){
   console.log(id);
   var URL = config.mvis.baseEndPointURL + config.mvis.port + '/Xdemo/Products/' + id ;
   request(URL, { json: true }, (err, res, body) => {
-    if (err) { return console.log(err); }
+    if (err) { console.log(err);  return null; }
     response.send(body);
   }).auth('agorovoy@rs.com','admin',true);
 });
@@ -52,7 +54,8 @@ router.get('/filter/:query',function(req,response){
   var URL = config.mvis.baseEndPointURL + config.mvis.port + '/Xdemo/Products?select=' + searchQuery;
   console.log(URL);
   request(URL, { json: true }, (err, res, body) => {
-    if (err) { return console.log(err); }
+    if (err) { console.log(err); return null; }
+    if (body.Products == undefined) {return response.send([]);}
     body.Products.forEach(el => { 
       prodList.push(el);
     });
