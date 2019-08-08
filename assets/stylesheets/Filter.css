@@ -1,6 +1,8 @@
 /* © 2019 Rocket Software, Inc. or its affiliates. All Rights Reserved
 Written by Andrew Gorovoy */
 
+
+
 .filter select {
   width: 170px;
   padding: 5px;
@@ -49,15 +51,9 @@ div.bg-white.border.rounded.py-2.collapse-inner {
  a.filter-option p {
   width: 150px;
   height: auto;
-  /* background-color: #4e73df;
-  color: red; */
-  color: #4e73df;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;  
-
-
-
 }
 
 
@@ -96,5 +92,4 @@ h6.text-primary.font-weight-bold.m-0 {
   margin: auto 20;
   display: inline-block;
   padding: 5px;
-
 }

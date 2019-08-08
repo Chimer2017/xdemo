@@ -121,24 +121,30 @@ function filterTable() {
     }
 
     $.each(filters, function() {
-
+      $('span.filter-header.' + triggerFilter).attr('value', triggerValue);
         var filter = $(this).attr('name');
         filter = filter.toLowerCase();
         filter = filter.replace(/:/g, '');
         value = $(this).attr('value');
+        
+        
         console.log("Filter: " + filter);
         console.log($(this).attr('name') + ":" + $(this).attr('value'));
+
         if ((value != "null") || (filter == triggerFilter)) {
 
 
             if (filter == 'rating') {
                 if (value == 'null') value = triggerValue;
-                console.log("In Rating -->");
-                value = value.replace(/-/g, '');
                 if (value == "Not Rated") value = "NR";
+                console.log("In Rating -->");
+                console.log(value);
+                var temp = value;
+                value = value.replace(/-/g, '');
                 var temp = filter + ' = "' + value + '"';
                 qryStr += temp + and;
                 $('span.filter-header.rating').text("Rating: " + value);
+                value = temp;
 
             }
 
@@ -173,7 +179,7 @@ function filterTable() {
                 var temp;
                 years.forEach(function(el) {
                     if (el.substring(el.length - 4, el.length) == value) {
-                        temp = filter + ' = "' + el + '"';
+                        temp = 'theaterdate' + ' = "' + el + '"';
                     }
                 });
                 qryStr += temp + and;

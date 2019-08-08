@@ -22,6 +22,7 @@ router.get('/:num', function(req, response, next) {
   console.log(URL);
   request(URL, { json: true }, (err, res, body) => {
     if (err) { console.log(err); return null; }
+    if (body.Products == undefined) {return response.send([]);}
       body.Products.forEach(el => { 
         prodList.push(el);
       });
@@ -41,6 +42,7 @@ router.get('/prodID/:prodID',function(req,response){
   var URL = config.mvis.baseEndPointURL + config.mvis.port + '/Xdemo/Products/' + id ;
   request(URL, { json: true }, (err, res, body) => {
     if (err) { console.log(err);  return null; }
+    if (body == undefined) {return response.send([]);}
     response.send(body);
   }).auth('agorovoy@rs.com','admin',true);
 });
@@ -52,7 +54,7 @@ router.get('/filter/:query',function(req,response){
   var searchQuery = req.params.query;
   var prodList = [];
   var URL = config.mvis.baseEndPointURL + config.mvis.port + '/Xdemo/Products?select=' + searchQuery;
-  console.log(URL);
+  console.log("URL: " + URL);
   request(URL, { json: true }, (err, res, body) => {
     if (err) { console.log(err); return null; }
     if (body.Products == undefined) {return response.send([]);}
